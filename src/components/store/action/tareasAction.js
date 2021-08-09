@@ -7,10 +7,18 @@ export const traerTareas = () => async (dispatch) =>{
     })
     try {
         const respuesta = await axios.get('https://jsonplaceholder.typicode.com/todos')
-     
+        const tareas ={}
+        respuesta.data.map((object) =>(
+            tareas[object.userId]= {
+                ...tareas[object.userId],
+                [object.id]:{
+                    ...object
+                }
+            }
+        ))
         dispatch({
             type:types.TRAER_TAREAS,
-            payload:respuesta.data
+            payload:tareas
         })
     } catch (error) {
         console.log()

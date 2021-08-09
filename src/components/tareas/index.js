@@ -11,7 +11,7 @@ const Tareas = ({traerTareas}) => {
 
     return (
         <div>
-            <h1>tareas saludar</h1>
+            <h1>tareas saludar marcos</h1>
         </div>
     )
 }
