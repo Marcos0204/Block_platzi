@@ -28,5 +28,20 @@ export const traerTareas = () => async (dispatch) =>{
 
         })
     }
-   
+}
+
+export const cambioUsuarioId =(usuario_id) => (dispatch) =>{
+    
+    dispatch({
+        type: types.CAMBIO_USUARIO_ID,
+        payload:usuario_id
+    })
+}
+
+export const cambioUsuarioTitulo =(title) => (dispatch) =>{
+    console.log('dispatch')
+    dispatch({
+        type: types.CAMBIO_USUARIO_TITULO,
+        payload:title
+    })
 }
