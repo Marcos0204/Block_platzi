@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {traerTareas} from '../store/action/tareasAction'
 import Snnipers from '../users/Snnipers'
@@ -43,7 +44,11 @@ const Tareas = ({traerTareas,
     return (
         <div>
             <button>
-                Agregar
+                <Link
+                    to='/tareas/agregar'
+                >
+                    Agregar
+                </Link>
             </button>
             {mostarContenido()}
         </div>
