@@ -1,21 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { cambioUsuarioId, cambioUsuarioTitulo } from '../store/action/tareasAction'
+import { cambioUsuarioId,  
+            cambioUsuarioTitulo,
+            agregar } from '../store/action/tareasAction'
 
-const Agregar = ({tareasReducer, cambioUsuarioId, cambioUsuarioTitulo}) => {
+const Agregar = ({tareasReducer, cambioUsuarioId, cambioUsuarioTitulo, agregar}) => {
+
+    const { usuario_id, titulo } = tareasReducer
+
     const cambioUsuario =(event) =>{
-        console.log(event.target.value)
         cambioUsuarioId(event.target.value)
     }
     const cambiioTitulo = (event) => {
         cambioUsuarioTitulo(event.target.value)
+    }
+    const guardar=() =>{
+        const nueva_tarea= {
+            userId:usuario_id,
+            title: titulo,
+            complete:false
+        }
+        agregar(nueva_tarea)
     }
     return (
         <div>
             <h1>Agregar</h1>
             Usuario iD:
             <input 
-                defaultValue={ tareasReducer.usuario_id }
+                defaultValue={ usuario_id }
                 type='number'
                 onChange={cambioUsuario}
             />
@@ -23,11 +35,13 @@ const Agregar = ({tareasReducer, cambioUsuarioId, cambioUsuarioTitulo}) => {
             Title :
             <input 
                 type='text'
-                defaultValue={tareasReducer.titulo}
+                defaultValue={titulo}
                 onChange={cambiioTitulo}
             />
             <br /><br/>
-            <button>
+            <button
+                onClick={guardar}
+            >
                 Guardar
             </button>
         </div>
@@ -39,7 +53,8 @@ const mapStateToPropa = ({tareasReducer}) => ({tareasReducer})
 const mapDispatchToProps= (dispatch) =>{
     return {
         cambioUsuarioId: (usuario_id) => dispatch(cambioUsuarioId(usuario_id)),
-        cambioUsuarioTitulo:(title) => dispatch(cambioUsuarioTitulo(title))
+        cambioUsuarioTitulo:(title) => dispatch(cambioUsuarioTitulo(title)),
+        agregar:(nueva_tarea) => dispatch(agregar(nueva_tarea))
     }
 }
 export default connect(mapStateToPropa, mapDispatchToProps)(Agregar)

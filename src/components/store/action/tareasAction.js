@@ -21,7 +21,7 @@ export const traerTareas = () => async (dispatch) =>{
             payload:tareas
         })
     } catch (error) {
-        console.log()
+        
         dispatch({
             type:  types.ERROR,
             payload:error.message
@@ -39,9 +39,28 @@ export const cambioUsuarioId =(usuario_id) => (dispatch) =>{
 }
 
 export const cambioUsuarioTitulo =(title) => (dispatch) =>{
-    console.log('dispatch')
+
     dispatch({
         type: types.CAMBIO_USUARIO_TITULO,
         payload:title
     })
 }
+
+export const agregar = (nueva_tarea) => async (dispatch) => {
+	dispatch({
+		type: types.CARGANDO
+	});
+
+
+	try {
+		const respuesta = await axios.post('https://jsonplaceholder.typicode.com/todos', nueva_tarea);
+        console.log(respuesta)
+	}
+	catch (error) {
+		console.log(error.message);
+		dispatch({
+			type: types.ERROR,
+			payload: 'Servicio no disponible en este momento.'
+		});
+	}
+};

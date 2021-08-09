@@ -4,7 +4,7 @@ const InitialState ={
     tareas:[],
     cargando: false,
     error:false,
-    usuario_id :10,
+    usuario_id : null,
     titulo:''
 }
 
