@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { cambioUsuarioId,  
             cambioUsuarioTitulo,
@@ -6,7 +6,13 @@ import { cambioUsuarioId,
 
 const Agregar = ({tareasReducer, cambioUsuarioId, cambioUsuarioTitulo, agregar}) => {
 
-    const { usuario_id, titulo } = tareasReducer
+    const { usuario_id, titulo , cargando} = tareasReducer
+    console.log(cargando)
+    useEffect(()=>{
+        if (cargando){
+            return console('cargando')
+        }
+    }, [cargando])
 
     const cambioUsuario =(event) =>{
         cambioUsuarioId(event.target.value)
@@ -21,6 +27,14 @@ const Agregar = ({tareasReducer, cambioUsuarioId, cambioUsuarioTitulo, agregar})
             complete:false
         }
         agregar(nueva_tarea)
+    }
+
+    const deshabilitar = () =>{
+        if(!usuario_id || !titulo) {
+            return true
+        }
+
+        return false
     }
     return (
         <div>
@@ -41,6 +55,7 @@ const Agregar = ({tareasReducer, cambioUsuarioId, cambioUsuarioTitulo, agregar})
             <br /><br/>
             <button
                 onClick={guardar}
+                disabled={deshabilitar()}
             >
                 Guardar
             </button>
